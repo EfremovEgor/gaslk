@@ -15,4 +15,13 @@ const eslintConfig = defineConfig([
   ]),
 ]);
 
+// enable eslint-plugin-import to understand our tsconfig paths
+eslintConfig.settings = {
+  "import/resolver": {
+    typescript: {
+      project: "./tsconfig.json",
+    },
+  },
+};
+
 export default eslintConfig;
