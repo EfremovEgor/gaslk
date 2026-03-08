@@ -24,6 +24,7 @@ COPY --from=build /app/.next ./.next
 COPY --from=build /app/prisma ./prisma
 COPY --from=build /app/public ./public
 COPY --from=build /app/scripts ./scripts        
+COPY --from=build /app/prisma.config.ts ./prisma.config.ts     
 COPY package.json yarn.lock* ./
 
 EXPOSE 3000
