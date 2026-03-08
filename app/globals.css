@@ -3,9 +3,11 @@
 :root {
   --background: #ffffff;
   --navbar-background: #f0f1f6;
+  --accent-blue: #02529a;
 }
 
 @theme inline {
+  --color-accent-blue: var(--accent-blue);
   --color-background: var(--background);
   --color-navbar-background: var(--navbar-background);
   --font-sans: var(--font-geist-sans);

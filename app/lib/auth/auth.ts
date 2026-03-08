@@ -1,12 +1,18 @@
+"use server";
 import { cookies } from "next/headers";
+import redis from "@lib/redis";
+import { prisma } from "@lib/prisma";
 
 /**
- * Check if user is logged in by verifying auth token in cookies
+ * Check if user is logged in by verifying auth token in cookies and Redis session
  * Use this in server components or server actions
  */
 export async function isUserLoggedIn(): Promise<boolean> {
 	const cookieStore = await cookies();
-	return !!cookieStore.get("authToken")?.value;
+	const token = cookieStore.get("authToken")?.value;
+	if (!token) return false;
+	const userId = await redis.get(`session:${token}`);
+	return !!userId;
 }
 
 /**
@@ -15,6 +21,17 @@ export async function isUserLoggedIn(): Promise<boolean> {
 export async function getAuthToken(): Promise<string | null> {
 	const cookieStore = await cookies();
 	return cookieStore.get("authToken")?.value || null;
+}
+
+/**
+ * Try to load the current user from the session cookie/redis
+ */
+export async function getCurrentUser() {
+	const token = await getAuthToken();
+	if (!token) return null;
+	const userId = await redis.get(`session:${token}`);
+	if (!userId) return null;
+	return prisma.user.findUnique({ where: { id: userId } });
 }
 
 /**

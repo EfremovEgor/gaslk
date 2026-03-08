@@ -32,7 +32,7 @@ const Navbar = () => {
 	const pathname = usePathname();
 	return (
 		<nav className="fixed bottom-0 left-0 w-full bg-navbar-background shadow-inner px-2 py-2">
-			<div className="flex justify-around">
+			<div className="flex justify-between">
 				{links.map((l) => {
 					const active = pathname === l.href;
 					return (
@@ -47,7 +47,7 @@ const Navbar = () => {
 								className={`text-4xl ${active ? "text-blue-500" : ""}`}
 								icon={l.icon}
 							/>
-							<span className="text-xs text-center mt-1">
+							<span className="text-xs font-bold text-center mt-1">
 								{l.label}
 							</span>
 						</Link>

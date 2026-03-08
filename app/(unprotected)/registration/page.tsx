@@ -34,8 +34,8 @@ export default function RegistrationPage() {
 				throw new Error("Registration failed");
 			}
 
-			// Redirect to login page after successful registration
-			router.push("/login");
+			// Registration endpoint now auto‑logs the user in, navigate to account
+			router.push("/account");
 		} catch (err) {
 			setError(err instanceof Error ? err.message : "An error occurred");
 		} finally {
