@@ -48,7 +48,7 @@ export default function RegistrationPage() {
 			<div className="max-w-md w-full space-y-8">
 				<div>
 					<h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-						Create your account
+						Создание аккаунта
 					</h2>
 				</div>
 				<form className="mt-8 space-y-6" onSubmit={handleRegister}>
@@ -63,7 +63,7 @@ export default function RegistrationPage() {
 					<div className="rounded-md shadow-sm -space-y-px">
 						<div>
 							<label htmlFor="email" className="sr-only">
-								Email address
+								Почта
 							</label>
 							<input
 								id="email"
@@ -78,7 +78,7 @@ export default function RegistrationPage() {
 						</div>
 						<div>
 							<label htmlFor="password" className="sr-only">
-								Password
+								Пароль
 							</label>
 							<input
 								id="password"
@@ -96,7 +96,7 @@ export default function RegistrationPage() {
 								htmlFor="confirmPassword"
 								className="sr-only"
 							>
-								Confirm Password
+								Повторите пароль
 							</label>
 							<input
 								id="confirmPassword"
@@ -126,7 +126,7 @@ export default function RegistrationPage() {
 							href="/login"
 							className="font-medium text-blue-600 hover:text-blue-500"
 						>
-							Already have an account? Sign in
+							Вход в аккаунт
 						</a>
 					</div>
 				</form>

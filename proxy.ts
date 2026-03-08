@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { clearAuthToken } from "@lib/auth/auth";
 
 export function proxy(request: NextRequest) {
 	const pathname = request.nextUrl.pathname;
@@ -18,6 +19,7 @@ export function proxy(request: NextRequest) {
 	);
 
 	if (!isLoggedIn && isProtectedRoute) {
+		clearAuthToken();
 		return NextResponse.redirect(new URL("/login", request.url));
 	}
 
