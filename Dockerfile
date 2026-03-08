@@ -8,7 +8,6 @@ WORKDIR /app
 COPY --from=base /app/node_modules ./node_modules
 COPY . .
 RUN yarn prisma generate
-RUN yarn prisma migrate deploy
 
 RUN yarn build
 
@@ -24,4 +23,4 @@ COPY --from=build /app/public ./public
 COPY package.json yarn.lock* ./
 
 EXPOSE 3000
-CMD ["yarn", "start"]
+CMD ["sh", "./scripts/startup.sh"]
