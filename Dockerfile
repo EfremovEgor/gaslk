@@ -7,6 +7,9 @@ FROM node:24-alpine AS build
 WORKDIR /app
 COPY --from=base /app/node_modules ./node_modules
 COPY . .
+
+RUN chmod +x ./scripts/startup.sh || true
+
 RUN yarn prisma generate
 
 RUN yarn build
@@ -20,6 +23,7 @@ COPY --from=base /app/node_modules ./node_modules
 COPY --from=build /app/.next ./.next
 COPY --from=build /app/prisma ./prisma
 COPY --from=build /app/public ./public
+COPY --from=build /app/scripts ./scripts        
 COPY package.json yarn.lock* ./
 
 EXPOSE 3000
