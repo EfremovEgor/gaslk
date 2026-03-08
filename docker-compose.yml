@@ -10,8 +10,11 @@ services:
         condition: service_healthy
       postgres:
         condition: service_healthy
-    env_file:
-      - .env
+    environment:
+      - NEXT_PUBLIC_VAPID_PUBLIC_KEY=${NEXT_PUBLIC_VAPID_PUBLIC_KEY}
+      - VAPID_PRIVATE_KEY=${VAPID_PRIVATE_KEY}
+      - REDIS_URL=${REDIS_URL}
+      - DATABASE_URL=${DATABASE_URL}
     container_name: nextjs-app
     restart: unless-stopped
 
@@ -29,11 +32,11 @@ services:
   postgres:
     image: postgres:16
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: gas_lk
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USER}
     expose:
-       - 5432
+      - 5432
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
