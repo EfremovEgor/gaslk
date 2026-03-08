@@ -8,6 +8,7 @@ WORKDIR /app
 COPY --from=base /app/node_modules ./node_modules
 COPY . .
 RUN yarn prisma generate
+RUN yarn prisma migrate deploy
 
 RUN yarn build
 
@@ -15,7 +16,6 @@ FROM node:24-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV production
-RUN yarn prisma migrate deploy
 
 COPY --from=base /app/node_modules ./node_modules
 COPY --from=build /app/.next ./.next
