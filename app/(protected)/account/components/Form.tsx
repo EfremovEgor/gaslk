@@ -1,6 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import { updateUser } from "../actions";
+import Input from "@components/ui/Input";
+import Button from "@components/ui/Button";
+import { Icon } from "@iconify/react";
 
 interface Address {
 	id: number;
@@ -68,7 +71,7 @@ const Form: React.FC<{ initialData: UserData }> = ({ initialData }) => {
 	};
 
 	return (
-		<div className="max-w-xl mx-auto py-8">
+		<div className="max-w-xl mx-auto my-4">
 			<h2 className="text-2xl font-semibold mb-4">Изменение данных</h2>
 			<form onSubmit={handleSubmit} className="space-y-4">
 				{error && (
@@ -84,12 +87,12 @@ const Form: React.FC<{ initialData: UserData }> = ({ initialData }) => {
 						<label className="block text-sm font-medium text-gray-700">
 							Имя
 						</label>
-						<input
+						<Input
 							name="firstName"
 							type="text"
 							value={firstName}
 							onChange={(e) => setFirstName(e.target.value)}
-							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+							className="mt-1"
 							required
 						/>
 					</div>
@@ -97,12 +100,12 @@ const Form: React.FC<{ initialData: UserData }> = ({ initialData }) => {
 						<label className="block text-sm font-medium text-gray-700">
 							Фамилия
 						</label>
-						<input
+						<Input
 							name="lastName"
 							type="text"
 							value={lastName}
 							onChange={(e) => setLastName(e.target.value)}
-							className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+							className="mt-1"
 							required
 						/>
 					</div>
@@ -112,12 +115,12 @@ const Form: React.FC<{ initialData: UserData }> = ({ initialData }) => {
 					<label className="block text-sm font-medium text-gray-700">
 						Отчество
 					</label>
-					<input
+					<Input
 						name="middleName"
 						type="text"
 						value={middleName}
 						onChange={(e) => setMiddleName(e.target.value)}
-						className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+						className="mt-1"
 					/>
 				</div>
 
@@ -125,14 +128,14 @@ const Form: React.FC<{ initialData: UserData }> = ({ initialData }) => {
 					<label className="block text-sm font-medium text-gray-700">
 						Номер телефона
 					</label>
-					<input
+					<Input
 						name="phone"
 						type="tel"
 						value={phone}
 						onChange={(e) => setPhone(e.target.value)}
 						pattern="\+?[0-9\-\s]{7,20}"
 						required
-						className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+						className="mt-1"
 					/>
 				</div>
 
@@ -140,11 +143,11 @@ const Form: React.FC<{ initialData: UserData }> = ({ initialData }) => {
 					<label className="block text-sm font-medium text-gray-700">
 						Почта
 					</label>
-					<input
+					<Input
 						type="email"
 						value={email}
 						readOnly
-						className="mt-1 block w-full rounded-md border-gray-300 bg-gray-100 shadow-sm sm:text-sm"
+						className="mt-1"
 					/>
 				</div>
 
@@ -152,12 +155,12 @@ const Form: React.FC<{ initialData: UserData }> = ({ initialData }) => {
 					<label className="block text-sm font-medium text-gray-700">
 						Пароль
 					</label>
-					<input
+					<Input
 						name="password"
 						type="password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
-						className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+						className="mt-1"
 					/>
 				</div>
 
@@ -167,40 +170,38 @@ const Form: React.FC<{ initialData: UserData }> = ({ initialData }) => {
 					</label>
 					{addresses.map((addr) => (
 						<div key={addr.id} className="flex items-center mt-1">
-							<input
+							<Input
 								name="addresses"
 								type="text"
 								value={addr.value}
 								onChange={(e) =>
 									handleAddressChange(addr.id, e.target.value)
 								}
-								className="flex-1 rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+								className="flex-1"
 							/>
 							<button
 								type="button"
 								onClick={() => handleRemoveAddress(addr.id)}
 								className="ml-2 text-red-600 hover:text-red-800"
 							>
-								Удалить
+								<Icon icon="gg:trash" className="text-3xl" />
 							</button>
 						</div>
 					))}
-					<button
+					<Button
+						size="small"
+						variant="secondary"
 						type="button"
 						onClick={handleAddAddress}
-						className="mt-2 inline-flex items-center px-3 py-1 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700"
+						className="mt-2 px-1 py-1"
 					>
-						Добавить адрес
-					</button>
+						+ Добавить адрес
+					</Button>
 				</div>
 
-				<button
-					type="submit"
-					disabled={loading}
-					className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50"
-				>
+				<Button type="submit" disabled={loading} className="w-full">
 					{loading ? "Сохранение..." : "Сохранить"}
-				</button>
+				</Button>
 			</form>
 		</div>
 	);

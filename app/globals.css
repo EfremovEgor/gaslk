@@ -3,11 +3,13 @@
 :root {
   --background: #ffffff;
   --navbar-background: #f0f1f6;
-  --accent-blue: #02529a;
+  --accent-blue: #01529a;
+  --focus-blue: #00417a;
 }
 
 @theme inline {
   --color-accent-blue: var(--accent-blue);
+  --color-focus-blue: var(--focus-blue);
   --color-background: var(--background);
   --color-navbar-background: var(--navbar-background);
   --font-sans: var(--font-geist-sans);

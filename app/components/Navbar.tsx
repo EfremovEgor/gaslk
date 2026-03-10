@@ -31,7 +31,7 @@ const links = [
 const Navbar = () => {
 	const pathname = usePathname();
 	return (
-		<nav className="fixed bottom-0 left-0 w-full bg-navbar-background shadow-inner px-2 py-2">
+		<nav className="fixed bottom-0 left-0 w-full bg-navbar-background shadow-inner px-4 pb-[calc(0.5rem+env(safe-area-inset-bottom))] pt-2">
 			<div className="flex justify-between">
 				{links.map((l) => {
 					const active = pathname === l.href;
@@ -40,14 +40,11 @@ const Navbar = () => {
 							key={l.href}
 							href={l.href}
 							className={`flex flex-col items-center text-xs ${
-								active ? "text-blue-500" : "text-gray-700"
+								active && "text-accent-blue"
 							}`}
 						>
-							<Icon
-								className={`text-4xl ${active ? "text-blue-500" : ""}`}
-								icon={l.icon}
-							/>
-							<span className="text-xs font-bold text-center mt-1">
+							<Icon className={`text-3xl`} icon={l.icon} />
+							<span className="text-xs  text-center mt-1">
 								{l.label}
 							</span>
 						</Link>
