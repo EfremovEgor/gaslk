@@ -12,7 +12,7 @@ const OrderStatusBadge = ({
 	const getBadgeClasses = (status: OrderStatus) => {
 		switch (status) {
 			case "pending":
-				return "bg-grey-100 text-grey-800";
+				return "bg-gray-100 text-gray-800";
 			case "confirmed":
 				return "bg-yellow-100 text-yellow-800";
 			case "shipped":
