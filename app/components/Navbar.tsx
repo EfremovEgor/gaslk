@@ -9,23 +9,32 @@ const links = [
 		href: "/account",
 		icon: "material-symbols:person-outline-rounded",
 		label: "Аккаунт",
+		activeColor: "text-accent-blue",
 	},
 	{
 		href: "/orders/active",
 		icon: "mingcute:shopping-cart-2-line",
 		label: "Текущие",
+		activeColor: "text-purple-500",
 	},
 	{
 		href: "/orders/finished",
 		icon: "tabler:clipboard-check",
 		label: "Завершенные",
+		activeColor: "text-green-600",
 	},
 	{
 		href: "/orders/completed",
 		icon: "mdi:fire",
 		label: "Статистика",
+		activeColor: "text-yellow-600",
 	},
-	{ href: "/orders/create", icon: "mdi:plus", label: "Новый" },
+	{
+		href: "/orders/create",
+		icon: "mdi:plus",
+		label: "Новый",
+		activeColor: "text-red-500",
+	},
 ];
 
 const Navbar = () => {
@@ -40,11 +49,11 @@ const Navbar = () => {
 							key={l.href}
 							href={l.href}
 							className={`flex flex-col items-center text-xs ${
-								active && "text-accent-blue"
+								active && l.activeColor
 							}`}
 						>
 							<Icon className={`text-3xl`} icon={l.icon} />
-							<span className="text-xs  text-center mt-1">
+							<span className="text-xs text-center mt-1">
 								{l.label}
 							</span>
 						</Link>

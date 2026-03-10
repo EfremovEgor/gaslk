@@ -5,8 +5,10 @@
   --navbar-background: #f0f1f6;
   --accent-blue: #01529a;
   --focus-blue: #00417a;
-  --text-secondary: var(--color-gray-600)
+  --text-secondary: var(--color-gray-600);
+
 }
+
 
 @theme inline {
   --color-accent-blue: var(--accent-blue);

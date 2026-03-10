@@ -23,18 +23,18 @@ const UpperNavbar = async () => {
 			</Link>
 			{user && (
 				<div className="flex flex-row gap-2 items-center">
-					<div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-blue/20 uppercase">
-						{user.lastName?.[0]}
-						{user.firstName?.[0]}
-					</div>
-					<form action={logout}>
-						<button type="submit">
-							<Icon
-								className="text-3xl text-accent-blue"
-								icon="mingcute:exit-line"
-							/>
-						</button>
-					</form>
+					{user.firstName && user.lastName && (
+						<div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-blue/20 uppercase">
+							{user.lastName?.[0]}
+							{user.firstName?.[0]}
+						</div>
+					)}
+					<button onClick={logout} type="submit">
+						<Icon
+							className="text-3xl text-accent-blue"
+							icon="mingcute:exit-line"
+						/>
+					</button>
 				</div>
 			)}
 		</div>

@@ -43,13 +43,28 @@ export async function updateUser(formData: FormData) {
 	const password = formData.get("password") as string;
 	const addresses = formData.getAll("addresses") as string[];
 
-	if (!firstName || !lastName || !phone) {
-		throw new Error("Required fields missing");
+	if (!firstName?.trim()) {
+		throw new Error("Имя не должно быть пустым");
+	}
+	if (!lastName?.trim()) {
+		throw new Error("Фамилия не должна быть пустой");
+	}
+	if (!phone?.trim()) {
+		throw new Error("Телефон не должен быть пустым");
 	}
 
 	const phonePattern = /^\+?[0-9\-\s]{7,20}$/;
 	if (!phonePattern.test(phone)) {
-		throw new Error("Invalid phone number");
+		throw new Error("Неверный формат телефона");
+	}
+
+	if (password && password.trim().length < 6) {
+		throw new Error("Пароль должен содержать минимум 6 символов");
+	}
+
+	const nonEmptyAddresses = addresses.filter((a) => a?.trim());
+	if (nonEmptyAddresses.length === 0) {
+		throw new Error("Добавьте хотя бы один адрес");
 	}
 
 	const updates: Record<string, unknown> = {
@@ -68,7 +83,6 @@ export async function updateUser(formData: FormData) {
 		data: updates,
 	});
 
-	// Handle addresses
 	await prisma.address.deleteMany({ where: { userId: user.id } });
 	const createData = addresses
 		.filter((a) => a && a.trim())

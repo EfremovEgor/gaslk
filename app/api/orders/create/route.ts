@@ -38,7 +38,7 @@ export async function POST(request: Request) {
 
 		if (selectedDate < tomorrow) {
 			return NextResponse.json(
-				{ error: "Delivery date cannot be in the past" },
+				{ error: "Дата отправки не может быть в прошлом" },
 				{ status: 400 },
 			);
 		}

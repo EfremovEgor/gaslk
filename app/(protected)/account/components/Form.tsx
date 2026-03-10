@@ -58,8 +58,26 @@ const Form: React.FC<{ initialData: UserData }> = ({ initialData }) => {
 		e.preventDefault();
 		setError("");
 
+		if (!firstName?.trim()) {
+			setError("Имя не должно быть пустым");
+			return;
+		}
+		if (!lastName?.trim()) {
+			setError("Фамилия не должна быть пустой");
+			return;
+		}
 		if (!phone || !phonePattern.test(phone)) {
-			setError("Please enter a valid phone number");
+			setError("Введите корректный номер телефона");
+			return;
+		}
+		if (password && password.trim().length < 6) {
+			setError("Пароль должен содержать минимум 6 символов");
+			return;
+		}
+
+		const nonEmptyAddresses = addresses.filter((a) => a.value?.trim());
+		if (nonEmptyAddresses.length === 0) {
+			setError("Добавьте хотя бы один адрес");
 			return;
 		}
 
