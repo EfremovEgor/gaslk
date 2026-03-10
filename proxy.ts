@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { clearAuthToken } from "@lib/auth/auth";
+import { clearAuthToken, getCurrentUser } from "@lib/auth/auth";
 
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
 	const pathname = request.nextUrl.pathname;
 	if (pathname == "/")
 		return NextResponse.redirect(new URL("/login", request.url));
 	const authToken = request.cookies.get("authToken")?.value;
-	const isLoggedIn = !!authToken;
+	const isLoggedIn = !!(await getCurrentUser());
 
 	const protectedRoutes = ["/account", "/orders"];
 	const isProtectedRoute = protectedRoutes.some((route) =>
