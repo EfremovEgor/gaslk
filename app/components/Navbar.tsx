@@ -24,7 +24,7 @@ const links = [
 		activeColor: "text-green-600",
 	},
 	{
-		href: "/orders/completed",
+		href: "/orders/statistics",
 		icon: "mdi:fire",
 		label: "Статистика",
 		activeColor: "text-yellow-600",

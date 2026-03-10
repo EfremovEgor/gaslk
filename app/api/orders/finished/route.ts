@@ -17,7 +17,7 @@ export async function GET() {
 			where: {
 				userId: user.id,
 				status: {
-					in: ["pending", "confirmed", "shipped", "delivered"],
+					in: ["cancelled", "completed"],
 				},
 			},
 			orderBy: {

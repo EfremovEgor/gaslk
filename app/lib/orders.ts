@@ -3,7 +3,8 @@ export type OrderStatus =
 	| "confirmed"
 	| "shipped"
 	| "delivered"
-	| "cancelled";
+	| "cancelled"
+	| "completed";
 
 export const ORDER_STATUS_LABELS: Record<OrderStatus, string> = {
 	pending: "В обработке",
@@ -11,4 +12,14 @@ export const ORDER_STATUS_LABELS: Record<OrderStatus, string> = {
 	shipped: "Отправлен",
 	delivered: "Доставлен",
 	cancelled: "Отменен",
+	completed: "Завершен",
 };
+
+export interface Order {
+	id: string;
+	createdAt: string;
+	status: OrderStatus;
+	desiredDeliveryDate: string;
+	deliveryAddress: string;
+	amount: number;
+}
