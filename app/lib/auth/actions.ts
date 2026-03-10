@@ -25,7 +25,10 @@ async function verifyPassword(
 }
 
 /**
- * Register a new user. Throws on failure.
+ * Register user
+ * @param email - User email address
+ * @param password - User password (will be hashed before
+ * storing in DB)
  */
 export async function register(email: string, password: string) {
 	email = email.trim().toLowerCase();
@@ -69,13 +72,10 @@ export async function login(email: string, password: string) {
 		throw new Error("Invalid credentials");
 	}
 
-	// generate session token and store mapping in redis
 	const token = crypto.randomUUID();
 	const key = `session:${token}`;
-	// expire in 7 days (same as cookie maxAge)
 	await redis.set(key, user.id, "EX", 60 * 60 * 24 * 7);
 
-	// set cookie on the response via helper
 	await setAuthToken(token);
 	return { user, token };
 }

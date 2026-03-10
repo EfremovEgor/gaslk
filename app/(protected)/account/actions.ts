@@ -28,7 +28,7 @@ export async function getUserData() {
 		middleName: user.middleName || "",
 		phoneNumber: user.phoneNumber || "",
 		email: user.email,
-		addresses: addresses.map((a) => a.address),
+		addresses: addresses,
 	};
 }
 

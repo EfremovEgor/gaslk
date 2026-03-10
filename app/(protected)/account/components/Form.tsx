@@ -6,7 +6,7 @@ import Button from "@components/ui/Button";
 import { Icon } from "@iconify/react";
 
 interface Address {
-	id: number;
+	id: string;
 	value: string;
 }
 
@@ -16,7 +16,10 @@ interface UserData {
 	middleName: string;
 	phoneNumber: string;
 	email: string;
-	addresses: string[];
+	addresses: {
+		address: string;
+		id: string;
+	}[];
 }
 
 const phonePattern = /^\+?[0-9\-\s]{7,20}$/;
@@ -29,20 +32,23 @@ const Form: React.FC<{ initialData: UserData }> = ({ initialData }) => {
 	const [email] = useState(initialData.email);
 	const [password, setPassword] = useState("");
 	const [addresses, setAddresses] = useState<Address[]>(
-		initialData.addresses.map((a, idx) => ({ id: idx, value: a })),
+		initialData.addresses.map((a, idx) => ({ id: a.id, value: a.address })),
 	);
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
 
 	const handleAddAddress = () => {
-		setAddresses((prev) => [...prev, { id: Date.now(), value: "" }]);
+		setAddresses((prev) => [
+			...prev,
+			{ id: Date.now().toString(), value: "" },
+		]);
 	};
 
-	const handleRemoveAddress = (id: number) => {
+	const handleRemoveAddress = (id: string) => {
 		setAddresses((prev) => prev.filter((a) => a.id !== id));
 	};
 
-	const handleAddressChange = (id: number, text: string) => {
+	const handleAddressChange = (id: string, text: string) => {
 		setAddresses((prev) =>
 			prev.map((a) => (a.id === id ? { ...a, value: text } : a)),
 		);
@@ -71,7 +77,7 @@ const Form: React.FC<{ initialData: UserData }> = ({ initialData }) => {
 	};
 
 	return (
-		<div className="max-w-xl mx-auto my-4">
+		<div className="max-w-xl mx-auto mt-4">
 			<h2 className="text-2xl font-semibold mb-4">Изменение данных</h2>
 			<form onSubmit={handleSubmit} className="space-y-4">
 				{error && (
