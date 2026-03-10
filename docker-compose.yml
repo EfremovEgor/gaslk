@@ -25,6 +25,8 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    volumes:
+        - redis_data:/data
     expose:
         - 6379
     restart: unless-stopped
@@ -47,3 +49,4 @@ services:
     restart: unless-stopped
 volumes:
   postgres_data:
+  redis_data:
