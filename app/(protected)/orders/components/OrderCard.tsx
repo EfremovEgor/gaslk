@@ -8,11 +8,9 @@ const OrderCard = ({ order }: { order: Order }) => {
 		<Card key={order.id}>
 			<div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-2">
 				<OrderStatusBadge status={order.status} />
-				<span className="text-sm mt-2 text-gray-500">
-					Заказ #{order.id.slice(0, 8)}...
-				</span>
-				<span className="text-sm font-medium">
-					{new Date(order.createdAt).toLocaleDateString("ru-RU")}
+				<span className="text-sm mt-2 ">Заказ {order.id}</span>
+				<span className="text-sm font-medium text-gray-500">
+					От {new Date(order.createdAt).toLocaleDateString("ru-RU")}
 				</span>
 			</div>
 
