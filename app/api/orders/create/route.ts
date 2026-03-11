@@ -97,7 +97,7 @@ export async function POST(request: Request) {
 		}
 
 		// Generate a unique order ID
-		let id: string;
+		let id: string = generateOrderId();
 		let isUnique = false;
 		let attempts = 0;
 		const maxAttempts = 10;
